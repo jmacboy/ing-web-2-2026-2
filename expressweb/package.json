@@ -11,9 +11,12 @@
   "description": "",
   "dependencies": {
     "body-parser": "^2.3.0",
+    "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
-    "nodemon": "^3.1.14"
+    "mysql2": "^3.23.3",
+    "nodemon": "^3.1.14",
+    "sequelize": "^6.37.8"
   },
   "packageManager": "pnpm@11.17.0+sha512.cca3cea332ad254bb84145f966d19f4879615210346fc92c79a047f23a0d7b3cca3c3792f0076ba1f1831d277efbcf0a9119b31a9a60eca7fb3d6231f331ef72"
 }

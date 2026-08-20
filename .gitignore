@@ -150,6 +150,9 @@ vite.config.ts.timestamp-*
 Thumbs.db
 desktop.ini
 
+# Local MySQL data persisted by Docker Compose
+**/data/mysql/
+
 # Editor and IDE files
 .idea/
 *.swp

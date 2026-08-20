@@ -1,0 +1,57 @@
+<%- include('../components/header') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Lista de personas</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Edad</th>
+                            <th>Ciudad</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% personas.forEach(persona=> { %>
+                            <tr>
+                                <td>
+                                    <%= persona.id %>
+                                </td>
+                                <td>
+                                    <%= persona.nombre %>
+                                </td>
+                                <td>
+                                    <%= persona.apellido %>
+                                </td>
+                                <td>
+                                    <%= persona.edad %>
+                                </td>
+                                <td>
+                                    <%= persona.ciudad %>
+                                </td>
+                                <td>
+                                    <%= persona.fechaNacimiento.toISOString().split('T')[0] %>
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary" href="/personas/<%= persona.id %>">Editar</a>
+                                </td>
+                                <td>
+                                    <form action="/personas/<%= persona.id %>/delete" method="post"
+                                        onsubmit="return confirm('Está seguro de eliminar el registro?')">
+                                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <%- include('../components/footer') %>

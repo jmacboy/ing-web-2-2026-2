@@ -5,6 +5,27 @@ Repositorio de la materia de Ingeniería Web II - 2026-2.
 
 - Node.js 18 o superior.
 - pnpm 11.
+- Docker Desktop con Docker Compose.
+
+## Levantar Docker
+
+Antes de ejecutar la aplicación, iniciá el contenedor de MySQL desde la raíz del proyecto:
+
+```bash
+docker compose up -d
+```
+
+Podés comprobar que el contenedor esté ejecutándose con:
+
+```bash
+docker compose ps
+```
+
+Para detenerlo cuando termines:
+
+```bash
+docker compose down
+```
 
 ## Instalación
 

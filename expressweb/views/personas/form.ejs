@@ -1,0 +1,42 @@
+<%- include('../components/header') %>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Formulario de Personas</h5>
+                        <form method="post" action="">
+                            <div class="mb-2">
+                                <label>Nombre</label>
+                                <input class="form-control" type="text" name="nombre" placeholder="Nombre"
+                                    value="<%= persona?.nombre %>" />
+                            </div>
+                            <div class="mb-2">
+                                <label>Apellido</label>
+                                <input class="form-control" type="text" name="apellido" placeholder="Apellido"
+                                    value="<%= persona?.apellido %>" />
+                            </div>
+                            <div class="mb-2">
+                                <label>Edad</label>
+                                <input class="form-control" type="number" name="edad" placeholder="Edad"
+                                    value="<%= persona?.edad %>" />
+                            </div>
+                            <div class="mb-2">
+                                <label>Ciudad</label>
+                                <input class="form-control" type="text" name="ciudad" placeholder="Ciudad"
+                                    value="<%= persona?.ciudad %>" />
+                            </div>
+                            <div class="mb-2">
+                                <label>Fecha de nacimiento</label>
+                                <input class="form-control" type="date" name="fechaNacimiento"
+                                    placeholder="Fecha de nacimiento"
+                                    value="<%= persona?.fechaNacimiento.toISOString().split('T')[0] %>" />
+                            </div>
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../components/footer') %>
