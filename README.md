@@ -7,6 +7,18 @@ Repositorio de la materia de Ingeniería Web II - 2026-2.
 - pnpm 11.
 - Docker Desktop con Docker Compose.
 
+## Configurar las variables de entorno
+
+Creá los archivos `.env` a partir de los ejemplos antes de levantar Docker y ejecutar la aplicación:
+
+1. En la carpeta principal del proyecto, buscá el archivo `.env.example`.
+2. Copialo y pegalo en la misma carpeta.
+3. Renombrá la copia como `.env` (sin `.example` al final).
+4. Entrá a la carpeta `expressweb`, repetí los pasos anteriores con el archivo `expressweb/.env.example` y dejá la copia como `expressweb/.env`.
+5. Abrí ambos archivos `.env` con un editor de texto y reemplazá los valores de ejemplo por los valores de tu entorno.
+
+El `.env` de la raíz configura MySQL para Docker y `expressweb/.env` configura la conexión de la aplicación. `MYSQL_DATABASE`, `MYSQL_USER`, `MYSQL_PASSWORD` y `MYSQL_PORT` deben coincidir entre ambos archivos; en `expressweb/.env`, usá `MYSQL_HOST=localhost`.
+
 ## Levantar Docker
 
 Antes de ejecutar la aplicación, iniciá el contenedor de MySQL desde la raíz del proyecto:
