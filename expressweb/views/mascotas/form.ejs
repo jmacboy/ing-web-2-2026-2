@@ -1,0 +1,47 @@
+<%- include('../components/header') %>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Formulario de Mascotas</h5>
+                        <%- include('../components/errors') %>
+                            <form method="post" action="">
+                                <div class="mb-2">
+                                    <label>Nombre</label>
+                                    <input required class="form-control" type="text" name="nombre"
+                                        placeholder="Nombre de la mascota" value="<%= model?.nombre %>" />
+                                </div>
+                                <div class="mb-2">
+                                    <label>Tipo</label>
+                                    <select required class="form-control" name="typo">
+                                        <option value="">Seleccione un tipo</option>
+                                        <option value="gato" <%=model?.tipo==='gato' ? 'selected' : '' %>>Gato
+                                        </option>
+                                        <option value="perro" <%=model?.tipo==='perro' ? 'selected' : '' %>>Perro
+                                        </option>
+                                        <option value="loro" <%=model?.tipo==='loro' ? 'selected' : '' %>>Loro
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="mb-2">
+                                    <label>Dueño</label>
+                                    <select required class="form-control" name="personaId">
+                                        <option value="">Seleccione un dueño</option>
+                                        <% personas.forEach(persona=> { %>
+                                            <option value="<%= persona.id %>" <%=model?.personaId==persona.id
+                                                ? 'selected' : '' %>>
+                                                <%= persona.nombre %>
+                                                    <%= persona.apellido %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../components/footer') %>

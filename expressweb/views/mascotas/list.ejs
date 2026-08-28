@@ -1,0 +1,51 @@
+<%- include('../components/header') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Lista de mascotas</h1>
+                <%- include('../components/errors') %>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Tipo</th>
+                                <th>Dueño</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% mascotas.forEach(mascota=> { %>
+                                <tr>
+                                    <td>
+                                        <%= mascota.id %>
+                                    </td>
+                                    <td>
+                                        <%= mascota.nombre %>
+                                    </td>
+                                    <td>
+                                        <%= mascota.tipo %>
+                                    </td>
+                                    <td>
+                                        <%= mascota.persona ? mascota.persona.nombre + ' ' + mascota.persona.apellido
+                                            : 'Sin dueño' %>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary" href="/mascotas/<%= mascota.id %>">Editar</a>
+                                    </td>
+                                    <td>
+                                        <form action="/mascotas/<%= mascota.id %>/delete" method="post"
+                                            onsubmit="return confirm('Está seguro de eliminar el registro?')">
+                                            <button class="btn btn-danger" type="submit">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+    <%- include('../components/footer') %>
