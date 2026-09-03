@@ -1,0 +1,32 @@
+<%- include('../components/header') %>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Formulario de Registro</h5>
+                        <%- include('../components/errors') %>
+                            <form method="post" action="/register">
+                                <div class="mb-2">
+                                    <label>Nombre Completo</label>
+                                    <input required class="form-control" type="text" name="fullname"
+                                        placeholder="Nombre Completo" />
+                                </div>
+                                <div class="mb-2">
+                                    <label>Email</label>
+                                    <input required class="form-control" type="email" name="email"
+                                        placeholder="Email" />
+                                </div>
+                                <div class="mb-2">
+                                    <label>Password</label>
+                                    <input required class="form-control" type="password" name="password"
+                                        placeholder="Password" />
+                                </div>
+                                <button class="btn btn-primary" type="submit">Registrar Usuario</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../components/footer') %>

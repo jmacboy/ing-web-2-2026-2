@@ -1,3 +1,4 @@
+const checkUserMiddleware = require("../middlewares/checkuser.middleware.js");
 const getObjectOr404 = require("../middlewares/getObjectOr404.middleware.js");
 const schemaValidate = require("../middlewares/schemaValidate.middleware.js");
 const mascotaSchema = require("../schemas/mascotaSchema.js");
@@ -13,5 +14,5 @@ module.exports = app => {
     router.post("/:id", getObjectOr404(mascotaService), schemaValidate(mascotaSchema, '/mascotas/:id'), controller.postMascotaUpdate);
     router.post("/:id/delete", getObjectOr404(mascotaService), controller.getMascotaDelete);
 
-    app.use('/mascotas', router);
+    app.use('/mascotas', checkUserMiddleware, router);
 };

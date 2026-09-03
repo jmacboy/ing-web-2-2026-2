@@ -1,4 +1,5 @@
 const mascotaService = require("../services/mascota.service");
+const personaService = require("../services/persona.service");
 
 exports.getMascotasList = async (req, res) => {
     const mascotas = await mascotaService.getObjectList();
