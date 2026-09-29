@@ -234,6 +234,13 @@
     "@eslint/core" "^1.2.1"
     levn "^0.4.1"
 
+"@hookform/resolvers@^5.9.1":
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-5.9.1.tgz#2010c1b542ce6fa75fa5d8fee5cc911ece009f5c"
+  integrity sha512-7b7vsbraJxKgjVSA1Nur9tLwj539WGJUBLA7QNvXnFoT2pM5Z7G+6rlukk4B2/QrTZy6huRtH6wKeESPKuIr6w==
+  dependencies:
+    "@standard-schema/utils" "^0.3.0"
+
 "@humanfs/core@^0.19.2":
   version "0.19.2"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.2.tgz#a8272ca03b2acf492670222b2320b6c421bfde60"
@@ -324,6 +331,11 @@
   resolved "https://registry.yarnpkg.com/@oxc-project/types/-/types-0.148.0.tgz#811d188a2e1af35784461b8a0490e13a3d76837c"
   integrity sha512-Nm4s/jB+4FpFsPhWGEC4h7rzksesmtnMXomo6rCMcg/b8zLQuOziRgkCS1fxDCXOlJB/6Q8oABOZ/OP6RIPj9A==
 
+"@remix-run/route-pattern@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@remix-run/route-pattern/-/route-pattern-0.22.1.tgz#4937466528a59a7c9d882f725aac92536d20e010"
+  integrity sha512-czdGJWh09Lapvcqt7Vb09KlrU2PhRJ8xQaI+AItTuD9aDJ5MAgxnS38lnys6Ll+6RJEqPiaUqTwIQhVLwFvv+w==
+
 "@rolldown/binding-android-arm-eabi@1.2.7":
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/@rolldown/binding-android-arm-eabi/-/binding-android-arm-eabi-1.2.7.tgz#9a0f9b6752ed522254f3715e81c066e5da6de9a9"
@@ -403,6 +415,11 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@rolldown/pluginutils/-/pluginutils-1.0.1.tgz#e3fcee093fbb5ce765e1ad088ff4de2889f6f9be"
   integrity sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==
+
+"@standard-schema/utils@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@standard-schema/utils/-/utils-0.3.0.tgz#3d5e608f16c2390c10528e98e59aef6bf73cae7b"
+  integrity sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==
 
 "@tailwindcss/node@4.3.3":
   version "4.3.3"
@@ -657,6 +674,11 @@ convert-source-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-2.0.0.tgz#4b560f649fc4e918dd0ab75cf4961e8bc882d82a"
   integrity sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==
+
+cookie-es@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/cookie-es/-/cookie-es-3.1.1.tgz#c4a8a16cf88cb5a185b23f4a61d6e9a85eb53287"
+  integrity sha512-UaXxwISYJPTr9hwQxMFYZ7kNhSXboMXP+Z3TRX6f1/NyaGPfuNUZOWP1pUEb75B2HjfklIYLVRfWiFZJyC6Npg==
 
 cross-spawn@^7.0.6:
   version "7.0.6"
@@ -1385,6 +1407,16 @@ prelude-ls@^1.2.1:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
 
+prettier-plugin-tailwindcss@^0.8.1:
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.8.1.tgz#bb30f2794dbaa2ef0d36e39ebc258c8c03d8f0c3"
+  integrity sha512-iaFMYqDsE4ffdDkn5qup0j5f2aCEBFZrdrZnvu9QKTlWx/iGPeQ4HHu7b7fCPMxeo9nwQBiOAh2nSypdFYWJkw==
+
+prettier@^3.9.9:
+  version "3.9.9"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.9.9.tgz#09b826918c91cd4cbc80e0cbd1d2a922ff04f233"
+  integrity sha512-Z/CJHIkdujO/OtN7nXUii0Rf3VT5SRuhjBA82Xvu2XhBUgX3nhP67T0LHceBdQLex7OOFGTox+Q5Yg8Jk2Qivg==
+
 proxy-from-env@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-2.1.0.tgz#a7487568adad577cfaaa7e88c49cab3ab3081aba"
@@ -1408,6 +1440,19 @@ react-dom@^19.2.8:
   integrity sha512-rVprimfGBG3DR+Tq0IQG2DT5PxKth1WIGDmj5yPmlzr4YBe7uyE+Du4oVqTDXZSHGGGXRtTJEGSSePyQCMBglQ==
   dependencies:
     scheduler "^0.27.0"
+
+react-hook-form@^7.89.0:
+  version "7.89.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.89.0.tgz#16bde1ff233fef58bbbfd5cda47e6df929251e70"
+  integrity sha512-vKcoCfy8RKZDrhSdqsRFp0uEOdS1AhLjOL6hR7Wmfzg1akNxEhaPf5WORx8SgEQPVXakdDyDkqQp+KNxVnnPHg==
+
+react-router@^8.4.0:
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-8.4.0.tgz#fa3c0ba58555cfb120a9ed8042518e374000fb4b"
+  integrity sha512-JtydAkBvU9UTEe5qNC+POhu+ZBNM7rlKY2IegwXc7Idj7xfRG16x5RZrw3mju+XlqBxfvb2ky9P3jUp9WyWC1g==
+  dependencies:
+    "@remix-run/route-pattern" "^0.22.1"
+    cookie-es "^3.1.1"
 
 react@^19.2.8:
   version "19.2.8"
@@ -1554,3 +1599,8 @@ yocto-queue@^0.1.0:
   version "4.5.4"
   resolved "https://registry.yarnpkg.com/zod/-/zod-4.5.4.tgz#e215c62420c528dd7951e31fb52c5438f1fd184a"
   integrity sha512-sC95tT5iHHH9gtpj6A81kh+NEaRAUFN+qlUPDUbRfOMvNf5QCBqsb3WgvnpVtK5Y+4UfA6KqufotuTvMGiTlsA==
+
+zod@^4.6.5:
+  version "4.6.5"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-4.6.5.tgz#e3af3edbdc260239c52f73caad05dbbffe6e82cd"
+  integrity sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==

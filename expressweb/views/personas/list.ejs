@@ -18,37 +18,44 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% personas.forEach(persona=> { %>
+                        <% if (personas.length==0) { %>
                             <tr>
-                                <td>
-                                    <%= persona.id %>
-                                </td>
-                                <td>
-                                    <%= persona.nombre %>
-                                </td>
-                                <td>
-                                    <%= persona.apellido %>
-                                </td>
-                                <td>
-                                    <%= persona.edad %>
-                                </td>
-                                <td>
-                                    <%= persona.ciudad %>
-                                </td>
-                                <td>
-                                    <%= persona.fechaNacimiento.toISOString().split('T')[0] %>
-                                </td>
-                                <td>
-                                    <a class="btn btn-primary" href="/personas/<%= persona.id %>">Editar</a>
-                                </td>
-                                <td>
-                                    <form action="/personas/<%= persona.id %>/delete" method="post"
-                                        onsubmit="return confirm('Está seguro de eliminar el registro?')">
-                                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                                    </form>
-                                </td>
+                                <td colspan="8">No hay personas registradas.</td>
                             </tr>
-                            <% }) %>
+                            <% } else { %>
+
+                                <% personas.forEach(persona=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= persona.id %>
+                                        </td>
+                                        <td>
+                                            <%= persona.nombre %>
+                                        </td>
+                                        <td>
+                                            <%= persona.apellido %>
+                                        </td>
+                                        <td>
+                                            <%= persona.edad %>
+                                        </td>
+                                        <td>
+                                            <%= persona.ciudad %>
+                                        </td>
+                                        <td>
+                                            <%= persona.fechaNacimiento.toISOString().split('T')[0] %>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary" href="/personas/<%= persona.id %>">Editar</a>
+                                        </td>
+                                        <td>
+                                            <form action="/personas/<%= persona.id %>/delete" method="post"
+                                                onsubmit="return confirm('Está seguro de eliminar el registro?')">
+                                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                        <% } %>
                     </tbody>
                 </table>
             </div>

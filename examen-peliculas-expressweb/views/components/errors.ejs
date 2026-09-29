@@ -1,0 +1,12 @@
+<% if (session.error && session.error.length> 0) { %>
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            <% session.error.forEach(err=> { %>
+                <li>
+                    <%= err %>
+                </li>
+                <% }); %>
+        </ul>
+    </div>
+    <% } %>
+        <% session.error=null; %>

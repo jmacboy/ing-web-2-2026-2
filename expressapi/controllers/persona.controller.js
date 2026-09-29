@@ -33,29 +33,15 @@ exports.putPersonaUpdate = async (req, res) => {
     res.json(personaActualizada);
 };
 exports.patchPersonaUpdate = async (req, res) => {
-    const persona = req.object;
-    let { nombre, apellido, edad, ciudad, fechaNacimiento } = req.body;
-    if (!nombre) {
-        nombre = persona.nombre;
-    }
-    if (!apellido) {
-        apellido = persona.apellido;
-    }
-    if (!edad) {
-        edad = persona.edad;
-    }
-    if (!ciudad) {
-        ciudad = persona.ciudad;
-    }
-    if (!fechaNacimiento) {
-        fechaNacimiento = persona.fechaNacimiento;
-    }
+    let persona = req.object;
+    const body = req.body;
+    persona = { ...persona, ...body };
     await personaService.updateObject(req.object.id, {
-        nombre,
-        apellido,
-        edad,
-        ciudad,
-        fechaNacimiento
+        nombre: persona.nombre,
+        apellido: persona.apellido,
+        edad: persona.edad,
+        ciudad: persona.ciudad,
+        fechaNacimiento: persona.fechaNacimiento
     });
     const personaActualizada = await personaService.getById(req.object.id);
     res.json(personaActualizada);

@@ -1,1 +1,20 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@layer components {
+    .container {
+        @apply mx-auto px-4;
+    }
+    .card {
+        @apply mt-4 mb-4 rounded-lg bg-white p-4 shadow-md;
+        .card-title {
+            @apply mb-2 text-xl font-semibold;
+        }
+    }
+    .table {
+        @apply w-full border-collapse;
+        th,
+        td {
+            @apply border px-4 py-2;
+        }
+    }
+}

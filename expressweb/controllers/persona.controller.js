@@ -3,6 +3,7 @@ const { generateCsrfToken } = require("../middlewares/csrf.middleware");
 
 exports.getPersonasList = async (req, res) => {
     const personas = await personaService.getObjectList();
+    coonsol
     res.render("personas/list", { personas });
 }
 exports.getPersonaCreate = (req, res) => {

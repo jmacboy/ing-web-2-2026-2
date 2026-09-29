@@ -1,0 +1,44 @@
+<%- include('../components/header') %>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Formulario de Pelicula</h5>
+                        <%- include('../components/errors') %>
+                            <form method="post" action="/peliculas/create">
+                                <div class="mb-2">
+                                    <label>Titulo</label>
+                                    <input required class="form-control" type="text" name="titulo" placeholder="Titulo"
+                                        value="<%= model?.titulo %>" />
+                                </div>
+                                <div class="mb-2">
+                                    <label>Año</label>
+                                    <input required class="form-control" type="number" name="anio" placeholder="Año"
+                                        value="<%= model?.anio %>" />
+                                </div>
+                                <div class="mb-2">
+                                    <label>Rating</label>
+                                    <input required class="form-control" type="number" name="rating"
+                                        placeholder="Rating" value="<%= model?.rating %>" />
+                                </div>
+                                <div class="mb-2">
+                                    <label>Género</label>
+                                    <select required class="form-control" name="generoId">
+                                        <option value="">Seleccione un género</option>
+                                        <% generos.forEach(objGenero=> { %>
+                                            <option value="<%= objGenero.id %>" <%=objGenero.id==model?.generoId
+                                                ? 'selected' : '' %>>
+                                                <%= objGenero.nombre %>
+                                            </option>
+                                            <% }) %>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../components/footer') %>

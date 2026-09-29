@@ -11,11 +11,15 @@
     "start": "vite"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.9.1",
     "@tailwindcss/vite": "^4.3.3",
     "axios": "^1.20.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "tailwindcss": "^4.3.3"
+    "react-hook-form": "^7.89.0",
+    "react-router": "^8.4.0",
+    "tailwindcss": "^4.3.3",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -26,6 +30,8 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.4",
     "globals": "^17.11.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "vite": "^8.2.2"
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
