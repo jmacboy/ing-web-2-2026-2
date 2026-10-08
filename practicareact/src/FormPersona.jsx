@@ -1,10 +1,13 @@
 import FormInput from './components/FormInput';
 import Button from './components/Button';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Navbar from './components/Navbar';
+import { useEffect } from 'react';
+import moment from 'moment';
+import { getPersonById, insertPerson, updatePerson } from './services/PersonService';
 
 const personaSchema = z.object({
     nombre: z.string().min(3, 'El nombre debe tener al menos 3 caracteres'),
@@ -24,71 +27,95 @@ const personaSchema = z.object({
 
 const FormPersona = () => {
     const navigate = useNavigate(); //hook de navegación
-
+    const { id } = useParams();
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(personaSchema),
     });
     const processData = (data) => {
-        axios.post('http://localhost:3000/personas', data).then((response) => {
-            console.log(response.data);
-            navigate('/personas');
-        });
+        if (id) {
+            updatePerson(id, data).then((response) => {
+                console.log(response.data);
+                navigate('/personas');
+            });
+        } else {
+            insertPerson(data).then(() => {
+                navigate('/personas');
+            });
+        }
     };
+    useEffect(() => {
+        const getPersona = () => {
+            if (!id) return;
+            getPersonById(id).then((persona) => {
+                setValue('nombre', persona.nombre);
+                setValue('apellido', persona.apellido);
+                setValue('edad', persona.edad.toString());
+                setValue('ciudad', persona.ciudad);
+                setValue('fechaNacimiento', moment(persona.fechaNacimiento).format('YYYY-MM-DD'));
+            });
+        };
+
+        getPersona();
+    }, [id, setValue]);
     return (
-        <div className="container">
-            <div className="card">
-                <h2 className="card-title">Formulario de Persona</h2>
-                <form onSubmit={handleSubmit(processData)}>
-                    <FormInput
-                        labelText="Nombre"
-                        id="txtNombre"
-                        placeholder="Nombre"
-                        errorText={errors.nombre?.message}
-                        {...register('nombre', { required: true })}
-                    />
-                    <FormInput
-                        labelText="Apellido"
-                        id="txtApellido"
-                        placeholder="Apellido"
-                        errorText={errors.apellido?.message}
-                        {...register('apellido', { required: true })}
-                    />
-                    <FormInput
-                        labelText="Edad"
-                        id="txtEdad"
-                        placeholder="Edad"
-                        errorText={errors.edad?.message}
-                        {...register('edad', { required: true })}
-                        type="number"
-                    />
-                    <FormInput
-                        labelText="Ciudad"
-                        id="txtCiudad"
-                        placeholder="Ciudad"
-                        errorText={errors.ciudad?.message}
-                        {...register('ciudad', { required: true })}
-                    />
-                    <FormInput
-                        labelText="Fecha de Nacimiento"
-                        type="date"
-                        id="txtFechaNacimiento"
-                        placeholder="Fecha de Nacimiento"
-                        errorText={errors.fechaNacimiento?.message}
-                        {...register('fechaNacimiento', { required: true })}
-                    />
-                    {/* <div>
+        <>
+            <Navbar />
+            <div className="container">
+                <div className="card">
+                    <h2 className="card-title">Formulario de Persona</h2>
+                    <form onSubmit={handleSubmit(processData)}>
+                        <FormInput
+                            labelText="Nombre"
+                            id="txtNombre"
+                            placeholder="Nombre"
+                            errorText={errors.nombre?.message}
+                            {...register('nombre', { required: true })}
+                        />
+                        <FormInput
+                            labelText="Apellido"
+                            id="txtApellido"
+                            placeholder="Apellido"
+                            errorText={errors.apellido?.message}
+                            {...register('apellido', { required: true })}
+                        />
+                        <FormInput
+                            labelText="Edad"
+                            id="txtEdad"
+                            placeholder="Edad"
+                            errorText={errors.edad?.message}
+                            {...register('edad', { required: true })}
+                            type="number"
+                        />
+                        <FormInput
+                            labelText="Ciudad"
+                            id="txtCiudad"
+                            placeholder="Ciudad"
+                            errorText={errors.ciudad?.message}
+                            {...register('ciudad', { required: true })}
+                        />
+                        <FormInput
+                            labelText="Fecha de Nacimiento"
+                            type="date"
+                            id="txtFechaNacimiento"
+                            placeholder="Fecha de Nacimiento"
+                            errorText={errors.fechaNacimiento?.message}
+                            {...register('fechaNacimiento', { required: true })}
+                        />
+                        {/* <div>
                         El nombre escrito es: {nombre} {apellido}
                     </div> */}
-                    <div className="mt-4">
-                        <Button text="Enviar" type="submit" />
-                    </div>
-                </form>
+                        <div className="mt-4">
+                            <Button text="Enviar" type="submit" />
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

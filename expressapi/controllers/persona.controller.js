@@ -1,5 +1,9 @@
 const personaService = require("../services/persona.service");
-
+exports.postPersonasSearch = async (req, res) => {
+    const { search } = req.body;
+    const personas = await personaService.getObjectsBySearch(search);
+    res.json(personas);
+}
 exports.getPersonasList = async (req, res) => {
     const personas = await personaService.getObjectList();
     res.json(personas);

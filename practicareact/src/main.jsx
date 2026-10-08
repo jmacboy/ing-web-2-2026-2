@@ -13,6 +13,7 @@ createRoot(document.getElementById('root')).render(
                 <Route path="/" element={<PersonList />} />
                 <Route path="/personas" element={<PersonList />} />
                 <Route path="/personas/create" element={<FormPersona />} />
+                <Route path="/personas/:id" element={<FormPersona />} />
             </Routes>
         </BrowserRouter>
     </StrictMode>,

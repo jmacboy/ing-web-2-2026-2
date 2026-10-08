@@ -4,6 +4,16 @@ const personaService = {
     getObjectList: async () => {
         return await db.persona.findAll();
     },
+    getObjectsBySearch: async (searchTerm) => {
+        return await db.persona.findAll({
+            where: {
+                [db.Sequelize.Op.or]: [
+                    { nombre: { [db.Sequelize.Op.like]: `%${searchTerm}%` } },
+                    { apellido: { [db.Sequelize.Op.like]: `%${searchTerm}%` } },
+                ]
+            }
+        });
+    },
     createObject: async ({ nombre,
         apellido,
         edad,
