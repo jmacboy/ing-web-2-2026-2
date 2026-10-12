@@ -1,12 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router';
+import useAuth from '../hooks/useAuth';
 
 export default function Navbar() {
+    const { isLoggedIn, logoutClick } = useAuth();
     const [open, setOpen] = useState(false);
     const menuItems = [
-        { name: 'Home', href: '/' },
+        { name: 'Iniciar sesión', href: '/login' },
+        { name: 'Registro', href: '/registro' },
+    ];
+    const loggedInMenuItems = [
+        { name: 'Dashboard', href: '/' },
+        { name: 'Lista de Personas', href: '/personas' },
         { name: 'Crear Persona', href: '/personas/create' },
     ];
+
     return (
         <nav className="bg-gray-900">
             <div className="mx-auto max-w-7xl px-4">
@@ -40,18 +48,28 @@ export default function Navbar() {
 
                     {/* Desktop menu */}
                     <div className="hidden items-center gap-6 lg:flex">
-                        {menuItems.map((item) => (
+                        {(isLoggedIn ? loggedInMenuItems : menuItems).map((item) => (
                             <Link to={item.href} className="text-white" key={'menu-' + item.name}>
                                 {item.name}
                             </Link>
                         ))}
+                        {isLoggedIn && (
+                            <button
+                                className="cursor-pointer text-white"
+                                onClick={() => {
+                                    logoutClick();
+                                }}
+                            >
+                                Cerrar sesión
+                            </button>
+                        )}
                     </div>
                 </div>
 
                 {/* Mobile menu */}
                 {open && (
                     <div className="flex flex-col gap-3 border-t border-gray-700 py-4 lg:hidden">
-                        {menuItems.map((item) => (
+                        {(isLoggedIn ? loggedInMenuItems : menuItems).map((item) => (
                             <Link
                                 to={item.href}
                                 className="text-white"
@@ -60,6 +78,16 @@ export default function Navbar() {
                                 {item.name}
                             </Link>
                         ))}
+                        {isLoggedIn && (
+                            <button
+                                className="cursor-pointer text-start text-white"
+                                onClick={() => {
+                                    logoutClick();
+                                }}
+                            >
+                                Cerrar sesión
+                            </button>
+                        )}
                     </div>
                 )}
             </div>

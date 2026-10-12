@@ -1,9 +1,15 @@
 import axios from "axios";
+import { getToken } from "./TokenService";
 
 const API_BASE_URL = 'http://localhost:3000/personas';
 export const getPersonaList = () =>
     new Promise((resolve, reject) => {
-        axios.get(API_BASE_URL).then((response) => {
+        const token = getToken();
+        axios.get(API_BASE_URL, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((response) => {
             console.log(response.data);
             resolve(response.data);
         }).catch((error) => {
