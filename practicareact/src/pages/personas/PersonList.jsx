@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import SearchBar from './components/SearchBar';
-import Navbar from './components/Navbar';
+import SearchBar from '../../components/SearchBar';
+import Navbar from '../../components/Navbar';
 import { Link } from 'react-router';
 import moment from 'moment';
-import { deletePerson, getPersonaList } from './services/PersonService';
+import { deletePerson, getPersonaList } from '../../services/PersonService';
 
 const PersonList = () => {
     const [personList, setPersonList] = useState([]);
+
     const loadPersonList = () => {
         getPersonaList().then((people) => {
             setPersonList(people);

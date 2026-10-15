@@ -1,40 +1,43 @@
-import Button from '../components/Button';
+import Button from '../../components/Button';
 import { useNavigate } from 'react-router';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Navbar from '../components/Navbar';
-import { loginUser } from '../services/AuthService';
-import FormInput from '../components/FormInput';
-import { setToken } from '../services/TokenService';
+import Navbar from '../../components/Navbar';
+import { registerUser } from '../../services/AuthService';
+import FormInput from '../../components/FormInput';
 
-const loginSchema = z.object({
+const registerSchema = z.object({
     email: z.string('email es obligatorio').email('Email no es válido'),
+    fullname: z.string('nombre es obligatorio'),
     password: z
         .string('password es obligatoria')
         .min(6, 'Contraseña debe tener al menos 6 caracteres'),
 });
 
-const FormLogin = () => {
+const FormRegistro = () => {
     const navigate = useNavigate();
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({
-        resolver: zodResolver(loginSchema),
+        resolver: zodResolver(registerSchema),
     });
     const processData = (data) => {
-        loginUser(data)
-            .then((response) => {
-                if (response.token) {
-                    setToken(response.token);
-                    navigate('/personas');
-                }
+        registerUser(data)
+            .then(() => {
+                navigate('/login');
             })
             .catch((error) => {
-                console.error(error);
-                alert('Error al iniciar sesión');
+                if (
+                    error.response.status === 400 &&
+                    error.response.data.message === 'Email already in use'
+                ) {
+                    alert('El email ya está en uso. Por favor, use otro email.');
+                } else {
+                    alert('Error al registrarse');
+                }
             });
     };
 
@@ -43,8 +46,17 @@ const FormLogin = () => {
             <Navbar />
             <div className="container">
                 <div className="card">
-                    <h2 className="card-title">Iniciar sesión</h2>
+                    <h2 className="card-title">Registrarse</h2>
                     <form onSubmit={handleSubmit(processData)}>
+                        <FormInput
+                            labelText="Nombre"
+                            id="txtName"
+                            type="text"
+                            placeholder="Nombre"
+                            errorText={errors.fullname?.message}
+                            {...register('fullname', { required: true })}
+                        />
+
                         <FormInput
                             labelText="Email"
                             id="txtEmail"
@@ -63,7 +75,7 @@ const FormLogin = () => {
                         />
 
                         <div className="mt-4">
-                            <Button text="Iniciar sesión" type="submit" />
+                            <Button text="Registro" type="submit" />
                         </div>
                     </form>
                 </div>
@@ -72,4 +84,4 @@ const FormLogin = () => {
     );
 };
 
-export default FormLogin;
+export default FormRegistro;

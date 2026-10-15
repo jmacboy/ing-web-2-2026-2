@@ -7,7 +7,7 @@ export default function Navbar() {
     const [open, setOpen] = useState(false);
     const menuItems = [
         { name: 'Iniciar sesión', href: '/login' },
-        { name: 'Registro', href: '/registro' },
+        { name: 'Registro', href: '/register' },
     ];
     const loggedInMenuItems = [
         { name: 'Dashboard', href: '/' },

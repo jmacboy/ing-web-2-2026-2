@@ -17,6 +17,10 @@ exports.postLogin = async (req, res) => {
 }
 exports.postRegister = async (req, res) => {
     const { email, password, fullname } = req.body;
+    const existingUser = await authService.getByEmail(email);
+    if (existingUser) {
+        return res.status(400).json({ message: "Email already in use" });
+    }
     const hashedPassword = sha1Encode(password);
     await authService.register({
         email,

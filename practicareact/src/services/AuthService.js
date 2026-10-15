@@ -10,3 +10,12 @@ export const loginUser = (data) => new Promise((resolve, reject) => {
         reject(error);
     });
 });
+export const registerUser = (data) => new Promise((resolve, reject) => {
+    axios.post(`${API_BASE_URL}/register`, data).then((response) => {
+        console.log(response.data);
+        resolve(response.data);
+    }).catch((error) => {
+        console.error(error);
+        reject(error);
+    });
+});

@@ -8,11 +8,11 @@ module.exports = app => {
     let router = require("express").Router();
     const controller = require("../controllers/persona.controller.js");
     router.get("/", userLoggedInMiddleware, controller.getPersonasList);
-    router.get("/:id", getObjectOr404(personaService), controller.getPersonaById);
-    router.post("/", schemaValidate(personaSchema), controller.postPersonaCreate);
-    router.post("/search", controller.postPersonasSearch);
-    router.put("/:id", getObjectOr404(personaService), schemaValidate(personaSchema), controller.putPersonaUpdate);
-    router.patch("/:id", getObjectOr404(personaService), schemaValidate(personaPatchSchema), controller.patchPersonaUpdate);
-    router.delete("/:id", getObjectOr404(personaService), controller.deletePersona);
+    router.get("/:id", userLoggedInMiddleware, getObjectOr404(personaService), controller.getPersonaById);
+    router.post("/", userLoggedInMiddleware, schemaValidate(personaSchema), controller.postPersonaCreate);
+    router.post("/search", userLoggedInMiddleware, controller.postPersonasSearch);
+    router.put("/:id", userLoggedInMiddleware, getObjectOr404(personaService), schemaValidate(personaSchema), controller.putPersonaUpdate);
+    router.patch("/:id", userLoggedInMiddleware, getObjectOr404(personaService), schemaValidate(personaPatchSchema), controller.patchPersonaUpdate);
+    router.delete("/:id", userLoggedInMiddleware, getObjectOr404(personaService), controller.deletePersona);
     app.use('/personas', router);
 };
