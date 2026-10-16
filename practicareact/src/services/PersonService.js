@@ -19,7 +19,13 @@ export const getPersonaList = () =>
     });
 
 export const getPersonById = (id) => new Promise((resolve, reject) => {
-    axios.get(`${API_BASE_URL}/${id}`).then((response) => {
+    const token = getToken();
+
+    axios.get(`${API_BASE_URL}/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }).then((response) => {
         const persona = response.data;
         console.log(persona);
         resolve(persona);
@@ -29,7 +35,12 @@ export const getPersonById = (id) => new Promise((resolve, reject) => {
     });
 });
 export const insertPerson = (data) => new Promise((resolve, reject) => {
-    axios.post(`${API_BASE_URL}`, data).then((response) => {
+    const token = getToken();
+    axios.post(`${API_BASE_URL}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }).then((response) => {
         console.log(response.data);
         resolve(response.data);
     }).catch((error) => {
@@ -38,7 +49,12 @@ export const insertPerson = (data) => new Promise((resolve, reject) => {
     });
 });
 export const updatePerson = (id, data) => new Promise((resolve, reject) => {
-    axios.put(`${API_BASE_URL}/${id}`, data).then((response) => {
+    const token = getToken();
+    axios.put(`${API_BASE_URL}/${id}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }).then((response) => {
         console.log(response.data);
         resolve(response.data);
     }).catch((error) => {
@@ -47,7 +63,12 @@ export const updatePerson = (id, data) => new Promise((resolve, reject) => {
     });
 });
 export const deletePerson = (id) => new Promise((resolve, reject) => {
-    axios.delete(`${API_BASE_URL}/${id}`).then((response) => {
+    const token = getToken();
+    axios.delete(`${API_BASE_URL}/${id}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    }).then((response) => {
         console.log(response.data);
         resolve(response.data);
     }).catch((error) => {
@@ -56,9 +77,15 @@ export const deletePerson = (id) => new Promise((resolve, reject) => {
     });
 });
 export const searchPerson = (searchText) => new Promise((resolve, reject) => {
+    const token = getToken();
     axios.post(`${API_BASE_URL}/search`, {
         search: searchText,
-    })
+    },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
         .then((response) => {
             console.log(response.data);
             resolve(response.data);
