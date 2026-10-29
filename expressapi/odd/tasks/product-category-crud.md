@@ -49,10 +49,12 @@ The API has no product or category resources. The user requested product fields 
 - Forecast: approximately 250–400 authored changed lines, excluding generated files.
 - Implemented category/product CRUD, required category association, validation schemas, and protected routes. Category deletion checks for products and the database association uses `RESTRICT`.
 - `node --check` passed for all 12 changed JavaScript files; `pnpm exec eslint` passed for those files.
+- Parent repeated the ESLint command successfully; pnpm emitted a packageManager version mismatch warning.
 - No database-backed verification was performed. No migration framework exists; new tables rely on existing non-forced `sequelize.sync()` behavior, which was not exercised.
+- Work-unit commit: `6bd5177` (`feat(api): add product and category CRUD`).
 
 ## Delivery
 - Strategy: ask-on-risk. Keep this feature to one coherent work-unit commit; delivery beyond the commit remains under ordinary repository policy.
 
 ## Next step
-Parent to review and create a Conventional Commit scoped to this work unit. Database-backed table creation and foreign-key enforcement remain unverified in this environment.
+Resolve the native review preflight's required intended-untracked selection, then follow only the continuation returned by native STATUS. Database-backed table creation and foreign-key enforcement remain unverified.

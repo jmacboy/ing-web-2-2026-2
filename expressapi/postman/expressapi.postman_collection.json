@@ -1,0 +1,109 @@
+{
+  "info": {
+    "_postman_id": "8f2f1905-49a2-4dc0-b31c-8b51be06d601",
+    "name": "Express API",
+    "description": "Colección para autenticación y endpoints de personas, mascotas, productos y categorías. Ejecutá Registrar usuario (opcional) si necesitás crear una cuenta; luego ejecutá Iniciar sesión para guardar el JWT en la variable de colección `token`.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" },
+    { "key": "token", "value": "" },
+    { "key": "personaId", "value": "1" },
+    { "key": "mascotaId", "value": "1" },
+    { "key": "productoId", "value": "1" },
+    { "key": "categoriaId", "value": "1" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+  },
+  "item": [
+    {
+      "name": "Autenticación",
+      "item": [
+        {
+          "name": "Registrar usuario",
+          "request": {
+            "method": "POST",
+            "auth": { "type": "noauth" },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"usuario@example.com\",\n  \"password\": \"password123\",\n  \"fullname\": \"Usuario de prueba\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] }
+          }
+        },
+        {
+          "name": "Iniciar sesión (guarda token)",
+          "event": [{
+            "listen": "test",
+            "script": {
+              "type": "text/javascript",
+              "exec": [
+                "pm.test('Login exitoso', function () { pm.response.to.have.status(200); });",
+                "const data = pm.response.json();",
+                "if (data.token) { pm.collectionVariables.set('token', data.token); }",
+                "pm.test('La respuesta contiene token', function () { pm.expect(data.token).to.be.a('string').and.not.empty; });"
+              ]
+            }
+          }],
+          "request": {
+            "method": "POST",
+            "auth": { "type": "noauth" },
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"usuario@example.com\",\n  \"password\": \"password123\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] },
+            "description": "El script de prueba guarda automáticamente la propiedad `token` de la respuesta en la variable de colección `token`."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Personas (requiere token)",
+      "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+      "item": [
+        { "name": "Listar personas", "request": { "method": "GET", "url": "{{baseUrl}}/personas" } },
+        { "name": "Obtener persona", "request": { "method": "GET", "url": "{{baseUrl}}/personas/{{personaId}}" } },
+        { "name": "Crear persona", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Ana\",\n  \"apellido\": \"Pérez\",\n  \"edad\": 30,\n  \"ciudad\": \"Córdoba\",\n  \"fechaNacimiento\": \"1995-01-15\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/personas" } },
+        { "name": "Buscar personas", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"search\": \"Ana\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/personas/search" } },
+        { "name": "Reemplazar persona", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Ana\",\n  \"apellido\": \"Pérez\",\n  \"edad\": 31,\n  \"ciudad\": \"Rosario\",\n  \"fechaNacimiento\": \"1995-01-15\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/personas/{{personaId}}" } },
+        { "name": "Actualizar parcialmente persona", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"ciudad\": \"Mendoza\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/personas/{{personaId}}" } },
+        { "name": "Eliminar persona", "request": { "method": "DELETE", "url": "{{baseUrl}}/personas/{{personaId}}" } }
+      ]
+    },
+    {
+      "name": "Mascotas (requiere token)",
+      "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+      "item": [
+        { "name": "Listar mascotas", "request": { "method": "GET", "url": "{{baseUrl}}/mascotas" } },
+        { "name": "Obtener mascota", "request": { "method": "GET", "url": "{{baseUrl}}/mascotas/{{mascotaId}}" } },
+        { "name": "Crear mascota", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Luna\",\n  \"tipo\": \"Perro\",\n  \"personaId\": \"{{personaId}}\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/mascotas" } },
+        { "name": "Reemplazar mascota", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Luna\",\n  \"tipo\": \"Perro\",\n  \"personaId\": \"{{personaId}}\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/mascotas/{{mascotaId}}" } },
+        { "name": "Actualizar parcialmente mascota (ruta existente; revisar esquema en API)", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Luna\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/mascotas/{{mascotaId}}", "description": "La ruta está declarada en la API, pero importa mascotaPatchSchema, que no aparece exportado por mascotaSchema.js; podría fallar al arrancar el servidor." } },
+        { "name": "Eliminar mascota", "request": { "method": "DELETE", "url": "{{baseUrl}}/mascotas/{{mascotaId}}" } }
+      ]
+    },
+    {
+      "name": "Productos (requiere token)",
+      "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+      "item": [
+        { "name": "Listar productos", "request": { "method": "GET", "url": "{{baseUrl}}/productos" } },
+        { "name": "Obtener producto", "request": { "method": "GET", "url": "{{baseUrl}}/productos/{{productoId}}" } },
+        { "name": "Crear producto", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Producto de prueba\",\n  \"precio\": 99.99,\n  \"stock\": 10,\n  \"categoriaId\": {{categoriaId}}\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/productos" } },
+        { "name": "Reemplazar producto", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Producto de prueba\",\n  \"precio\": 109.99,\n  \"stock\": 8,\n  \"categoriaId\": {{categoriaId}}\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/productos/{{productoId}}" } },
+        { "name": "Actualizar parcialmente producto", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"stock\": 12\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/productos/{{productoId}}" } },
+        { "name": "Eliminar producto", "request": { "method": "DELETE", "url": "{{baseUrl}}/productos/{{productoId}}" } }
+      ]
+    },
+    {
+      "name": "Categorías (requiere token)",
+      "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }] },
+      "item": [
+        { "name": "Listar categorías", "request": { "method": "GET", "url": "{{baseUrl}}/categorias" } },
+        { "name": "Obtener categoría", "request": { "method": "GET", "url": "{{baseUrl}}/categorias/{{categoriaId}}" } },
+        { "name": "Crear categoría", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Categoría de prueba\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/categorias" } },
+        { "name": "Reemplazar categoría", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Categoría actualizada\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/categorias/{{categoriaId}}" } },
+        { "name": "Actualizar parcialmente categoría", "request": { "method": "PATCH", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Otra categoría\"\n}", "options": { "raw": { "language": "json" } } }, "url": "{{baseUrl}}/categorias/{{categoriaId}}" } },
+        { "name": "Eliminar categoría", "request": { "method": "DELETE", "url": "{{baseUrl}}/categorias/{{categoriaId}}" } }
+      ]
+    }
+  ]
+}

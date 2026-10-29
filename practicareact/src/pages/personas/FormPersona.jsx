@@ -8,7 +8,6 @@ import Navbar from '../../components/Navbar';
 import { useEffect } from 'react';
 import moment from 'moment';
 import { getPersonById, insertPerson, updatePerson } from '../../services/PersonService';
-import useAuth from '../../hooks/useAuth';
 
 const personaSchema = z.object({
     nombre: z.string().min(3, 'El nombre debe tener al menos 3 caracteres'),

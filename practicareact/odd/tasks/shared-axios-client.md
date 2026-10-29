@@ -26,8 +26,10 @@ Extract the Axios base URL and bearer-token request interceptor into a shared mo
 - `yarn build`: passed (parent spot check and writer run).
 - `yarn lint`: failed on the pre-existing unused `setIsLoggedIn` in `src/hooks/useAuth.jsx:7`; that unrelated file was not changed.
 - `git diff --check`: passed.
-- Review assessment: unassessable because the worktree contains other untracked files; native STATUS selection is needed before any review.
-- Current status: implementation and checks complete; work-unit commit pending.
+- Work-unit commit: `3aca7c0` (`refactor(http): share axios client configuration`).
+- Review assessment: unassessable because the worktree contains unrelated untracked files; committed-only assessment also requires the inventory to be declared.
+- Native STATUS returned `intended_untracked_selection_required`, but its `external.select_intended_untracked` capture operation is unavailable in this runtime. No review START was invoked.
+- Current status: implementation and work-unit commit complete; native review continuation is blocked on the required selection capture.
 
 ## Next step
-Commit the authorized files as one work unit, then record the commit identity and mirror this document to Engram.
+Provide/enable the exact native capture for intended untracked selection, then resume with the same captured STATUS binding.
